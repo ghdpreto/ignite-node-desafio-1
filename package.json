@@ -1,0 +1,16 @@
+{
+  "name": "ignite-node-desafio-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "18.15.0"
+  },
+  "scripts": {
+    "start:dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
