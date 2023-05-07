@@ -54,13 +54,32 @@ export const routes = [
         url: buildRoutePath('/tasks'),
         handler: (req, res) => {
             const { title, description } = req.query
+
+
             
             const tasks = database.select('tasks', {
                 title: title ?  title : null,
                 description: description ?  description  : null
             })
-            
+
             return res.end(JSON.stringify({ tasks }))
+        }
+    },
+
+    {
+        method: 'DELETE',
+        url: buildRoutePath('/tasks/:id'),
+        handler: (req, res) => {
+
+            const { id } = req.params
+
+            const existTask = database.selectById('tasks', id)
+
+            if (!existTask) return res.writeHead(404).end()
+
+            database.delete('tasks', id)
+
+            return res.writeHead(204).end()
         }
     },
 

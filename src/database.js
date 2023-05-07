@@ -58,4 +58,23 @@ export class Database {
 
         return data
     }
+    
+    selectById(table, id) {
+        let data = this.#database[table] ?? []
+
+        const task = data.find(el => el.id === id)
+
+        if (!task) return null
+
+        return task
+    }
+
+    delete(table, id) {
+        const rowIndex = this.#database[table].findIndex(row => row.id === id)
+
+        if (rowIndex > -1) {
+            this.#database[table].splice(rowIndex, 1)
+            this.#persist()
+        }
+    }
 }
