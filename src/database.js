@@ -58,7 +58,7 @@ export class Database {
 
         return data
     }
-    
+
     selectById(table, id) {
         let data = this.#database[table] ?? []
 
@@ -74,6 +74,15 @@ export class Database {
 
         if (rowIndex > -1) {
             this.#database[table].splice(rowIndex, 1)
+            this.#persist()
+        }
+    }
+
+    update(table, id, data) {
+        const rowIndex = this.#database[table].findIndex(el => el.id === id)
+        
+        if (rowIndex > -1) {
+            this.#database[table][rowIndex] = { id, ...data, updated_at: new Date() }
             this.#persist()
         }
     }
