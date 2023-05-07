@@ -4,7 +4,6 @@
 
 export async function json(req, res) {
     const buffers = []
-
     for await (const pedaco of req) {
         buffers.push(pedaco)
     }

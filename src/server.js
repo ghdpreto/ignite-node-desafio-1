@@ -12,6 +12,7 @@ const server = http.createServer(async (req, res) => {
     })
 
     if (route) {
+
         return route.handler(req, res)
     }
 
