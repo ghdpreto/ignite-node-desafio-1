@@ -2,6 +2,7 @@ import http from "node:http"
 import { json } from "./middlewares/json.js"
 import { extractQueryParams } from "./utils/extract-query-params.js"
 import { routes } from "./routes.js"
+import  '../streams/csv.js'
 
 
 const server = http.createServer(async (req, res) => {
