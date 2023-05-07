@@ -39,13 +39,22 @@ export const routes = [
                     description
                 }
 
-                database.insert('task', novaTask)
+                database.insert('tasks', novaTask)
 
                 return res.writeHead(201).end()
             } catch (error) {
                 return res.writeHead(400).end(JSON.stringify({mensagem: error.message}))
             }
         }
-    }
+    },
+
+    {
+        method: 'GET',
+        url: '/tasks',
+        handler: (req, res) => {
+            const tasks = database.select('tasks')
+            return res.end(JSON.stringify([{ tasks }]  ))
+        }
+    },
 
 ]
