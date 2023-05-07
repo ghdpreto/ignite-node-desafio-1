@@ -37,13 +37,23 @@ export class Database {
         let data = this.#database[table] ?? []
 
         if (filter) {
-            data = data.filter(row => { 
-                return Object.entries(filter).some(([key, value]) => {
-                    if (value) {
-                        return row[key].toLowerCase().includes(value.toLowerCase())
-                    }
-                })
+            const filtroComValor = Object.entries(filter).filter(([key, value]) => {
+                if (value) {
+                    return { [key]:value }
+                }
             })
+
+            if (filtroComValor.length >=1) {
+                data = data.filter(row => {
+                    return filtroComValor.some(([key, value]) => {
+                        if (value) {
+                            return row[key].toLowerCase().includes(value.toLowerCase())
+                        } else {
+                            return row
+                        }
+                    })
+                })
+            }
         }
 
         return data
